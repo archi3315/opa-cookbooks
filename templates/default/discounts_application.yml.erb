@@ -4,7 +4,7 @@ server:
 spring:
     data:
         elasticsearch:
-        	clusterNodes: "localhost:9300"
+        	clusterNodes: "<%= node[:opsworks][:instance][:private_ip] %>:9300"
         	
 logging:
     file: "<%= node.discounts[:log_path] %>/<%= node.discounts[:log_file] %>"
