@@ -1,9 +1,9 @@
-deploy[:discounts][:port] = 8788
-discounts[:user] = "discounts"
-discounts[:gid] = "discounts"
-discounts[:pid_path] = "/var/run/discounts"
-discounts[:pid_file] = "/var/run/discounts/discounts.pid"
-discounts[:skip_restart] = false
-discounts[:log_file] = "discounts.log"
-discounts[:log_path] = "/var/log/discounts"
+node.default[:deploy][:discounts][:port] = 8788
+node.default[:discounts][:user] = "discounts"
+node.default[:discounts][:gid] = "discounts"
+node.default[:discounts][:pid_path] = "/var/run/discounts"
+node.default[:discounts][:pid_file] = "/var/run/discounts/discounts.pid"
+node.default[:discounts][:skip_restart] = false
+node.default[:discounts][:log_file] = "discounts.log"
+node.default[:discounts][:log_path] = "/var/log/discounts"
 
