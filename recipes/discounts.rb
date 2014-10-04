@@ -50,11 +50,14 @@ directory node.discounts[:pid_path] do
   recursive true
 end
 
-# Create logging path
+# Create paths
 #
-directory node.discounts[:log_path] do
-  mode '0755'
-  recursive true
+[ node.deploy[:discounts][:deploy_to], node.discounts[:log_path] ].each do |path|
+  directory path do
+    owner node.discounts[:user] and group node.discounts[:user] and mode 0755
+    recursive true
+    action :create
+  end
 end
 
 # Create config file
