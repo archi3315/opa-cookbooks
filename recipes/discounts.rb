@@ -1,7 +1,3 @@
-[Chef::Recipe, Chef::Resource].each { |l| l.send :include, ::Extensions }
-
-Erubis::Context.send(:include, Extensions::Templates)
-
 include_recipe 'aws'
 
 # Create user and group
@@ -21,6 +17,8 @@ user node.discounts[:user] do
   supports :manage_home => false
   action  :create
   system true
+  
+  only_if "getent passwd #{node.discounts[:user]}"
 end
 
 # Create service
