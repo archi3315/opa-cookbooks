@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 #
-# discounts
+# <%= node.discounts[:user] %>
 #
 <% if node.platform_family?('debian') %>
 ### BEGIN INIT INFO
-# Provides:          discounts
+# Provides:          <%= node.discounts[:user] %>
 # Required-Start:    $network $remote_fs $named
 # Required-Stop:     $network $remote_fs $named
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Starts discounts
-# Description:       Starts discounts using start-stop-daemon
+# Short-Description: Starts <%= node.discounts[:user] %>
+# Description:       Starts <%= node.discounts[:user] %> using start-stop-daemon
 ### END INIT INFO
 <% else %>
 # chkconfig:   - 57 47
-# description: discounts
-# processname: discounts
+# description: <%= node.discounts[:user] %>
+# processname: <%= node.discounts[:user] %>
 # config:      <%= node.deploy[:discounts][:deploy_to] %>/application.yml
 <% end %>
 
@@ -28,13 +28,12 @@ if [ -f /etc/sysconfig/network ]; then source /etc/sysconfig/network; fi
 [ "$NETWORKING" = "no" ] && exit
 
 
-serviceName="discounts"
+serviceName="<%= node.discounts[:user] %>"
 serviceUser="<%= node.discounts[:user] %>"
 serviceGroup="<%= node.discounts[:user] %>"
-applDir="/opt/$serviceName"                      
-serviceLogFile="/var/log/$serviceName/$serviceName.console.log"
+applDir="<%= node.deploy[:discounts][:deploy_to] %>"
 maxShutdownTime=15                                        
-pidFile="<%= node.discounts[:pid_file] %>"
+pidFile="<%= node.discounts[:pid][:path] %>/<%= node.discounts[:pid][:file] %>"
 javaCommand="java"                                         
 javaExe=$(which java)
 javaArgs="-jar ./$serviceName.jar"
@@ -76,8 +75,7 @@ function startServiceProcess {
    cd $applDir || return 1
    rm -f $pidFile
    makeFileWritable $pidFile || return 1
-   makeFileWritable $serviceLogFile || return 1
-   cmd="nohup $javaCommandLine >>$serviceLogFile 2>&1 & echo \$! >$pidFile"
+   cmd="nohup $javaCommandLine >/dev/null 2>&1 & echo \$! >$pidFile"
    su -m $serviceUser -s $SHELL -c "$cmd" || return 1
    sleep 0.1
    pid="$(<$pidFile)"

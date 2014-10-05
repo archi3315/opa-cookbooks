@@ -1,10 +1,11 @@
 server:
-    port: <%= node.deploy[:discounts][:port] %>
+    port: <%= node[:discounts][:port] %>
 
 spring:
     data:
         elasticsearch:
-        	clusterNodes: "<%= node[:opsworks][:instance][:private_ip] %>:9300"
-        	
+            clusterNodes: "<%= node[:opsworks][:instance][:private_ip] %>:9300"
+            clusterName: "<%= node[:elasticsearch][:cluster][:name] %>"
+
 logging:
-    file: "<%= node.discounts[:log_path] %>/<%= node.discounts[:log_file] %>"
+    file: "<%= node.discounts[:log][:path] %>/<%= node.discounts[:log][:file] %>"

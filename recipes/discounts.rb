@@ -23,11 +23,6 @@ user node.discounts[:user] do
   system true
 end
 
-directory node.discounts[:pid_path] do
-  mode '0755'
-  recursive true
-end
-
 # Create service
 #
 template "/etc/init.d/discounts" do
@@ -42,14 +37,14 @@ end
 
 # Create pid path
 #
-directory node.discounts[:pid_path] do
+directory node.discounts[:pid][:path] do
   mode '0755'
   recursive true
 end
 
 # Create paths
 #
-[ node.deploy[:discounts][:deploy_to], node.discounts[:log_path] ].each do |path|
+[ node.deploy[:discounts][:deploy_to], node.discounts[:log][:path] ].each do |path|
   directory path do
     owner node.discounts[:user] and group node.discounts[:user] and mode 0755
     recursive true
@@ -59,11 +54,10 @@ end
 
 # Deploy the jar file
 #
+jarFile = node.discounts[:version].nil? ? "discounts.jar" : "discounts-#{node.discounts[:version]}.jar"
 aws_s3_file "#{node.deploy[:discounts][:deploy_to]}/discounts.jar" do
   bucket "opa-deployments"
-  remote_path "discounts/discounts.jar"
-  aws_access_key_id node.s3[:opa_deployments][:access_key]
-  aws_secret_access_key node.s3[:opa_deployments][:secret_key]
+  remote_path "discounts/"+jarFile
 end
 
 # Create config file
