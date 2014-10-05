@@ -30,7 +30,7 @@ if [ -f /etc/sysconfig/network ]; then source /etc/sysconfig/network; fi
 
 serviceName="discounts"
 serviceUser="<%= node.discounts[:user] %>"
-serviceGroup="<%= node.discounts[:gid] %>"
+serviceGroup="<%= node.discounts[:user] %>"
 applDir="/opt/$serviceName"                      
 serviceLogFile="/var/log/$serviceName/$serviceName.console.log"
 maxShutdownTime=15                                        
