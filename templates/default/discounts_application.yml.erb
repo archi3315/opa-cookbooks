@@ -9,3 +9,4 @@ spring:
 
 logging:
     file: "<%= node.discounts[:log][:path] %>/<%= node.discounts[:log][:file] %>"
+    config: "<%= node.deploy[:discounts][:deploy_to] %>/logback.xml"

@@ -64,6 +64,11 @@ end
 
 # Create config file
 #
+template "logback.xml" do
+  path   "#{node.deploy[:discounts][:deploy_to]}/logback.xml"
+  source "logback.xml.erb"
+  owner  node.discounts[:user] and group node.discounts[:user] and mode 0755
+end
 template "application.yml" do
   path   "#{node.deploy[:discounts][:deploy_to]}/application.yml"
   source "discounts_application.yml.erb"
