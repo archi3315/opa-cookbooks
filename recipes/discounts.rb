@@ -2,10 +2,7 @@
 
 Erubis::Context.send(:include, Extensions::Templates)
 
-elasticsearch = "elasticsearch-#{node.elasticsearch[:version]}"
-
-include_recipe "elasticsearch::curl"
-include_recipe "ark"
+include_recipe 'aws'
 
 # Create user and group
 #
@@ -58,6 +55,15 @@ end
     recursive true
     action :create
   end
+end
+
+# Deploy the jar file
+#
+aws_s3_file "#{node.deploy[:discounts][:deploy_to]}/discounts.jar" do
+  bucket "opa-deployments"
+  remote_path "discounts/discounts.jar"
+  aws_access_key_id node.s3[:opa_deployments][:access_key]
+  aws_secret_access_key node.s3[:opa_deployments][:secret_key]
 end
 
 # Create config file
