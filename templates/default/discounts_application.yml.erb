@@ -10,11 +10,11 @@ spring:
         url: "jdbc:mysql://<%= node.deploy[:discounts][:database][:host] %>:3306/<%= node.deploy[:discounts][:database][:database] %>"
         username: "<%= node.deploy[:discounts][:database][:username] %>"
         password: "<%= node.deploy[:discounts][:database][:password] %>"
-        driverClassName: <%= node.default[:discounts][:database][:driverClassName] %>
+        driverClassName: "<%= node.default[:discounts][:database][:driverClassName] %>"
         maxActive: <%= node.default[:discounts][:database][:maxActive] %>
         initialSize: <%= node.default[:discounts][:database][:initialSize] %>
         testOnBorrow: <%= node.default[:discounts][:database][:testOnBorrow] %>
-        validationQuery: <%= node.default[:discounts][:database][:validationQuery] %>
+        validationQuery: "<%= node.default[:discounts][:database][:validationQuery] %>"
         validationQueryTimeout: <%= node.default[:discounts][:database][:validationQueryTimeout] %>
         removeAbandoned: <%= node.default[:discounts][:database][:removeAbandoned] %>
         removeAbandonedTimeout: <%= node.default[:discounts][:database][:removeAbandonedTimeout] %>
