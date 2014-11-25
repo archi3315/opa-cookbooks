@@ -7,9 +7,9 @@ spring:
             clusterNodes: "<%= node[:opsworks][:instance][:private_ip] %>:9300"
             clusterName: "<%= node[:elasticsearch][:cluster][:name] %>"
     datasource:
-        url: "jdbc:mysql://<%= deploy[:discounts][:database][:host] %>:3306/<%= deploy[:discounts][:database][:database] %>"
-        username: "<%= deploy[:discounts][:database][:username] %>"
-        password: "<%= deploy[:discounts][:database][:password] %>"
+        url: "jdbc:mysql://<%= node.deploy[:discounts][:database][:host] %>:3306/<%= node.deploy[:discounts][:database][:database] %>"
+        username: "<%= node.deploy[:discounts][:database][:username] %>"
+        password: "<%= node.deploy[:discounts][:database][:password] %>"
         driverClassName: <%= node.default[:discounts][:database][:driverClassName] %>
         maxActive: <%= node.default[:discounts][:database][:maxActive] %>
         initialSize: <%= node.default[:discounts][:database][:initialSize] %>
