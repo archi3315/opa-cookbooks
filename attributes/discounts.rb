@@ -10,4 +10,11 @@ node.default[:discounts][:log][:file] = "discounts.log"
 node.default[:discounts][:log][:path] = "/var/log/discounts"
 node.default[:discounts][:log][:rolling_date_pattern] = "yyyy-MM-dd"
 node.default[:discounts][:log][:rolling_file_extension] = ".gz"
-
+node.default[:discounts][:database][:driverClassName] = "com.mysql.jdbc.Driver"
+node.default[:discounts][:database][:maxActive] = 5
+node.default[:discounts][:database][:initialSize] = 5
+node.default[:discounts][:database][:testOnBorrow] = true
+node.default[:discounts][:database][:validationQuery] = "SELECT 1"
+node.default[:discounts][:database][:validationQueryTimeout] = 1
+node.default[:discounts][:database][:removeAbandoned] = true
+node.default[:discounts][:database][:removeAbandonedTimeout] = 10
